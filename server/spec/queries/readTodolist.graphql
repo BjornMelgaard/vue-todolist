@@ -1,0 +1,43 @@
+query=query {
+  projects {
+    edges {
+      node {
+        name
+        id
+
+        tasks {
+          edges {
+            node {
+              id
+              name
+              done
+              deadline
+              position
+
+              comments {
+                edges {
+                  node {
+                    id
+                    text
+
+                    attachments {
+                      edges {
+                        node {
+                          id
+                          file
+                        }
+                      }
+                    }
+
+                  }
+                }
+              }
+
+            }
+          }
+        }
+
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+session_name: todolist
+start_directory: ./
+windows:
+- window_name: client
+  layout: even-horizontal
+  start_directory: ./client
+  panes:
+    - n
+- window_name: server
+  layout: even-horizontal
+  start_directory: ./server
+  panes:
+    - n
+- window_name: runners
+  layout: even-vertical
+  panes:
+    - shell_command:
+      - cd client
+      - yarn run start
+    - shell_command:
+      - cd server
+      - export PORT=3001
+      - rails s
