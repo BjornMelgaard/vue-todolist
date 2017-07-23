@@ -1,59 +1,50 @@
 <template>
   <section class="container">
-    <div>
-      <logo/>
-      <h1 class="title">
-        NUXT
-      </h1>
-      <h2 class="subtitle">
-        Universal Vue.js Application
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
-        <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
-      </div>
-    </div>
+    <img src="../assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
+    <h1 class="title">
+      USERS
+    </h1>
+    <ul class="users">
+      <li v-for="(user, index) in users" class="user">
+        <nuxt-link :to="{ name: 'id', params: { id: index }}">
+          {{ user.name }}
+        </nuxt-link>
+      </li>
+    </ul>
   </section>
 </template>
 
 <script>
-import Logo from '~components/Logo.vue'
+import axios from '~plugins/axios'
 
 export default {
-  components: {
-    Logo
+  async asyncData () {
+    let { data } = await axios.get('/api/users')
+    return {
+      users: data
+    }
+  },
+  head () {
+    return {
+      title: 'Users'
+    }
   }
 }
 </script>
 
-<style>
-.container
-{
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+<style scoped>
 .title
 {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+  margin: 30px 0;
 }
-.subtitle
+.users
 {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
-.links
+.user
 {
-  padding-top: 15px;
+  margin: 10px 0;
 }
 </style>

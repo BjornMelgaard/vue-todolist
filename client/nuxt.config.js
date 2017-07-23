@@ -14,13 +14,14 @@ module.exports = {
     ]
   },
   /*
-  ** Customize the progress-bar color
+  ** Global CSS
   */
-  loading: { color: '#3B8070' },
+  css: ['~assets/css/main.css'],
   /*
-  ** Build configuration
+  ** Add axios globally
   */
   build: {
+    vendor: ['axios'],
     /*
     ** Run ESLINT on save
     */

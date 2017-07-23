@@ -1,4 +1,4 @@
-session_name: todolist
+session_name: dev
 start_directory: ./
 windows:
 - window_name: client
