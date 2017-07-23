@@ -1,4 +1,4 @@
-# vue-todolist
+# some
 
 > Nuxt.js project
 
