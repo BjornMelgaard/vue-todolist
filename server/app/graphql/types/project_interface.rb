@@ -5,6 +5,6 @@ Types::ProjectInterface = GraphQL::ObjectType.define do
     attr :id
     attr :name
 
-    has_many_connection :tasks
+    has_many_array :tasks
   end
 end

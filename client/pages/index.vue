@@ -1,50 +1,44 @@
 <template>
-  <section class="container">
-    <img src="../assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
-    <h1 class="title">
-      USERS
-    </h1>
-    <ul class="users">
-      <li v-for="(user, index) in users" class="user">
-        <nuxt-link :to="{ name: 'id', params: { id: index }}">
-          {{ user.name }}
+  <div>
+    <h3>Cars</h3>
+    <div v-if="loading > 0">
+      loading...
+    </div>
+    <ul v-else>
+      <li v-for="car in allCars">
+        <nuxt-link :to="`car/${car.id}`">
+          {{ car.year }} {{ car.make }} {{ car.model }}
         </nuxt-link>
       </li>
     </ul>
-  </section>
+  </div>
 </template>
 
 <script>
-import axios from '~plugins/axios'
+import gql from 'graphql-tag'
 
 export default {
-  async asyncData () {
-    let { data } = await axios.get('/api/users')
+  data () {
+    console.log(this.$error) // binded function in browser console, undefined in terminal
     return {
-      users: data
+      loading: 0
     }
   },
-  head () {
-    return {
-      title: 'Users'
+  apollo: {
+    allCars: {
+      query: gql`query {
+        projects {
+          name
+        }
+      }`,
+      loadingKey: 'loading',
+      error (error) {
+        console.log(this.loading) // defined everywhere
+        console.log(this.$error) // binded function in browser console, undefined in terminal
+        console.log(error)
+        // this.$error(error.message) // critical error here, but not in browser
+      }
     }
   }
 }
 </script>
-
-<style scoped>
-.title
-{
-  margin: 30px 0;
-}
-.users
-{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.user
-{
-  margin: 10px 0;
-}
-</style>

@@ -8,6 +8,6 @@ Types::TaskInterface = GraphQL::ObjectType.define do
     attr :deadline
     attr :position
 
-    has_many_connection :comments
+    has_many_array :comments
   end
 end

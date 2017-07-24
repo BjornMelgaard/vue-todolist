@@ -5,6 +5,6 @@ Types::CommentInterface = GraphQL::ObjectType.define do
     attr :id
     attr :text
 
-    has_many_connection :attachments
+    has_many_array :attachments
   end
 end

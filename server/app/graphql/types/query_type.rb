@@ -22,7 +22,7 @@ Types::QueryType = GraphQL::ObjectType.define do
     type: Types::AttachmentInterface
   )
 
-  connection :projects, Types::ProjectInterface.connection_type do
+  field :projects, types[Types::ProjectInterface] do
     resolve Resolvers::ProjectResolver.new ->(_, _, ctx) {
       Pundit.policy_scope!(ctx[:current_user], Project)
     }

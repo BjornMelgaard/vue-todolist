@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 module.exports = {
   /*
   ** Headers of the page
@@ -17,11 +19,7 @@ module.exports = {
   ** Global CSS
   */
   css: ['~assets/css/main.css'],
-  /*
-  ** Add axios globally
-  */
   build: {
-    vendor: ['axios'],
     /*
     ** Run ESLINT on save
     */
@@ -34,6 +32,25 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-    }
-  }
+    },
+    vendor: ['babel-polyfill', 'vue-apollo', 'apollo-client'],
+    plugins: [
+      new webpack.DefinePlugin({
+        // also will set baseURL and browserBaseURL in @nuxtjs/axios
+        'process.env.API_URL': "'http://localhost:3001/api/edge'"
+      })
+    ]
+  },
+  router: {
+    // middleware: 'apollo'
+  },
+  plugins: [
+    '~plugins/apollo.js'
+  ],
+  modules: [
+    '@nuxtjs/pwa',
+    '@nuxtjs/axios',
+    '@nuxtjs/bulma',
+    '@nuxtjs/toast'
+  ]
 }
