@@ -16,10 +16,11 @@
 
 <script>
 import gql from 'graphql-tag'
+import { mapActions } from 'vuex'
+import { ADD_TOAST_MESSAGE } from 'vuex-toast'
 
 export default {
   data () {
-    console.log(this.$error) // binded function in browser console, undefined in terminal
     return {
       loading: 0
     }
@@ -33,11 +34,22 @@ export default {
       }`,
       loadingKey: 'loading',
       error (error) {
-        console.log(this.loading) // defined everywhere
-        console.log(this.$error) // binded function in browser console, undefined in terminal
-        console.log(error)
-        // this.$error(error.message) // critical error here, but not in browser
+        console.log('sending')
+        this.sendNotification(error.message)
       }
+    }
+  },
+  methods: {
+    ...mapActions({
+      addToast: ADD_TOAST_MESSAGE
+    }),
+
+    sendNotification (text) {
+      this.addToast({
+        text,
+        type: 'success',
+        dismissAfter: 10000
+      })
     }
   }
 }

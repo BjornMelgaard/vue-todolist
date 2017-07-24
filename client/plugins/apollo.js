@@ -9,6 +9,7 @@ function createClient (ctx) {
 
   const networkInterface = createNetworkInterface({
     uri: `${process.env.API_URL}/graphql`,
+    // uri: 'https://api.graph.cool/simple/v1/cj1dqiyvqqnmj0113yuqamkuu',
     transportBatching: true
   })
 
@@ -22,7 +23,9 @@ function createClient (ctx) {
 export default (ctx) => {
   const { app } = ctx
 
-  app.apolloProvider = new VueApollo({
-    defaultClient: createClient(ctx)
-  })
+  if (!app.apolloProvider) {
+    app.apolloProvider = new VueApollo({
+      defaultClient: createClient(ctx)
+    })
+  }
 }

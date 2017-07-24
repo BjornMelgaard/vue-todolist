@@ -23,7 +23,8 @@
     "express": "^4.15.3",
     "graphql-tag": "^2.4.2",
     "nuxt": "1.0.0-alpha.5",
-    "vue-apollo": "^2.1.0-beta.18"
+    "vue-apollo": "^2.1.0-beta.18",
+    "vuex-toast": "^0.1.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

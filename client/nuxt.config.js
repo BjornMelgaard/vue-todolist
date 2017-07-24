@@ -50,7 +50,6 @@ module.exports = {
   modules: [
     '@nuxtjs/pwa',
     '@nuxtjs/axios',
-    '@nuxtjs/bulma',
-    '@nuxtjs/toast'
+    '@nuxtjs/bulma'
   ]
 }

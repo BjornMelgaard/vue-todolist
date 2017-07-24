@@ -1,5 +1,6 @@
 <template>
   <div>
+    <toast position="ne"></toast>
     <nuxt/>
     <my-footer/>
   </div>
@@ -7,10 +8,12 @@
 
 <script>
 import MyFooter from '~components/Footer.vue'
+import { Toast } from 'vuex-toast'
 
 export default {
   components: {
-    MyFooter
+    MyFooter,
+    Toast
   }
 }
 </script>
