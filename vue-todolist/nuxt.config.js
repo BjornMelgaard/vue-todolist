@@ -1,3 +1,5 @@
+const { resolve } = require('path')
+
 module.exports = {
   /*
   ** Headers of the page
@@ -14,11 +16,15 @@ module.exports = {
     ]
   },
   /*
+  ** Customize the progress-bar color
+  */
+  loading: { color: '#3B8070' },
+  /*
   ** Global CSS
   */
   css: [
     'buefy/lib/buefy.css',
-    '~assets/css/main.css'
+    { src: '~assets/css/main.scss', lang: 'scss' }
   ],
   build: {
     /*
@@ -34,7 +40,7 @@ module.exports = {
     //     })
     //   }
     // },
-    vendor: ['babel-polyfill', 'vue-apollo', 'apollo-client']
+    // vendor: ['babel-polyfill', 'vue-apollo', 'apollo-client']
   },
   env: {
     // dublicate baseURL for internal usage
@@ -45,13 +51,12 @@ module.exports = {
   },
   plugins: [
     // '~plugins/apollo.js'
-    '~plugins/buefy.js',
-    '~plugins/multiwatch.js'
+    resolve(__dirname, 'plugins/buefy.js'),
+    resolve(__dirname, 'plugins/multiwatch.js')
   ],
   modules: [
     ['@nuxtjs/axios', { baseURL: 'http://localhost:3001/api/edge' }],
     '@nuxtjs/bulma',
     '@nuxtjs/font-awesome'
-    // '@nuxtjs/axios-devise'
   ]
 }
