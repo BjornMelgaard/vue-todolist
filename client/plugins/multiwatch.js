@@ -6,3 +6,5 @@ Vue.prototype.$multiwatch = function (props, watcher) {
   }
   props.forEach(iterator, this)
 }
+
+export default (_) => { }

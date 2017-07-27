@@ -12,7 +12,6 @@
 
 export default {
   async asyncData ({ app }) {
-    console.log('asdf')
     // const dd = await app.$axios.get('/members_only')
     return {
       project: 'asdf'
@@ -24,3 +23,4 @@ export default {
   }
 }
 </script>
+
