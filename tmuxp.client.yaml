@@ -1,0 +1,14 @@
+session_name: client
+start_directory: ./client
+shell_command_before:
+  - source ../bin/env
+windows:
+- window_name: vim
+  layout: even-horizontal
+  panes:
+    - n
+- window_name: workspace
+  layout: even-vertical
+  panes:
+    - yarn run dev
+    -

@@ -1,0 +1,14 @@
+session_name: server
+start_directory: ./server
+shell_command_before:
+  - source ../bin/env
+windows:
+- window_name: vim
+  layout: even-horizontal
+  panes:
+    - n
+- window_name: workspace
+  layout: even-vertical
+  panes:
+    - rails s -p $SERVER_PORT_DEV
+    -

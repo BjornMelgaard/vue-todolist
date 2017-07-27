@@ -1,17 +1,16 @@
 <template>
   <div>
     <nuxt/>
+    <my-footer/>
   </div>
 </template>
 
 <script>
-// import MyFooter from '~components/Footer.vue'
-// import { Toast } from 'vuex-toast'
+import MyFooter from '~components/Footer.vue'
 
 export default {
   components: {
-    // MyFooter,
-    // Toast
+    MyFooter
   }
 }
 </script>
