@@ -1,9 +1,7 @@
-const { resolve } = require('path')
+const apiURL = 'http://localhost:3001/api/edge'
 
 module.exports = {
-  /*
-  ** Headers of the page
-  */
+  // Headers of the page
   head: {
     title: 'starter',
     meta: [
@@ -15,21 +13,15 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  /*
-  ** Customize the progress-bar color
-  */
+  // Customize the progress-bar color
   loading: { color: '#3B8070' },
-  /*
-  ** Global CSS
-  */
+  // Global CSS
   css: [
     'buefy/lib/buefy.css',
     { src: '~assets/css/main.scss', lang: 'scss' }
   ],
   build: {
-    /*
-    ** Run ESLINT on save
-    */
+    // Run ESLINT on save
     // extend (config, ctx) {
     //   if (ctx.isClient) {
     //     config.module.rules.push({
@@ -40,23 +32,25 @@ module.exports = {
     //     })
     //   }
     // },
-    // vendor: ['babel-polyfill', 'vue-apollo', 'apollo-client']
+    vendor: ['babel-polyfill']
   },
   env: {
-    // dublicate baseURL for internal usage
-    baseURL: 'http://localhost:3001/api/edge'
-  },
-  router: {
-    // middleware: 'apollo'
+    // dublicate of axios baseURL for internal usage
+    baseURL: apiURL
   },
   plugins: [
-    // '~plugins/apollo.js'
-    resolve(__dirname, 'plugins/buefy.js'),
-    resolve(__dirname, 'plugins/multiwatch.js')
+    '~plugins/buefy.js',
+    '~plugins/multiwatch.js'
   ],
   modules: [
-    ['@nuxtjs/axios', { baseURL: 'http://localhost:3001/api/edge' }],
     '@nuxtjs/bulma',
-    '@nuxtjs/font-awesome'
-  ]
+    '@nuxtjs/font-awesome',
+    '@nuxtjs/apollo',
+    ['@nuxtjs/axios', { baseURL: apiURL }]
+  ],
+  apollo: {
+    clients: {
+      default: 'https://api.graph.cool/simple/v1/cj1dqiyvqqnmj0113yuqamkuu'
+    }
+  }
 }
