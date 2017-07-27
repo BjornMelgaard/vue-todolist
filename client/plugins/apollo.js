@@ -4,8 +4,9 @@ import { ApolloClient, createNetworkInterface } from 'apollo-client'
 
 Vue.use(VueApollo)
 
-function createClient (ctx) {
-  const { isDev, isClient } = ctx
+function createClient () {
+  const isDev = process.env.NODE_END === 'development'
+  const isClient = process.browser
 
   const networkInterface = createNetworkInterface({
     uri: `${process.env.API_URL}/graphql`,
@@ -23,9 +24,7 @@ function createClient (ctx) {
 export default (ctx) => {
   const { app } = ctx
 
-  if (!app.apolloProvider) {
-    app.apolloProvider = new VueApollo({
-      defaultClient: createClient(ctx)
-    })
-  }
+  app.apolloProvider = new VueApollo({
+    defaultClient: createClient()
+  })
 }

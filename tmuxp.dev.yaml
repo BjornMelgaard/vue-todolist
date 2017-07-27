@@ -8,15 +8,11 @@ windows:
   start_directory: ./client
   panes:
     - n
-- window_name: runners
+- window_name: workspace
   layout: even-vertical
   panes:
-    - shell_command:
-      - cd client
-      - yarn run start
-    - shell_command:
-      - cd server
-      - rails s -p $SERVER_PORT_DEV
+    - cd client
+    - cd server
 - window_name: server
   layout: even-horizontal
   start_directory: ./server

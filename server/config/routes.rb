@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   scope '/api/edge' do
     post '/graphql', to: 'graphql#execute'
     mount_devise_token_auth_for 'User', at: 'auth'
+    get 'members_only', to: 'demo_user#members_only'
   end
 end
