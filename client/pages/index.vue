@@ -1,13 +1,7 @@
 <template>
   <div>
     <h3>Cars</h3>
-    <ul>
-      <li v-for="car in allCars">
-        <nuxt-link :to="`car/${car.id}`">
-          {{ car.year }} {{ car.make }} {{ car.model }}
-        </nuxt-link>
-      </li>
-    </ul>
+    <p>{{ smth }}</p>
   </div>
 </template>
 
@@ -15,12 +9,17 @@
 import allCars from '~/queries/allCars'
 
 export default {
-  apollo: {
-    allCars: {
-      prefetch: true,
-      query: allCars
+  data () {
+    return {
+      smth: 'safsdf'
     }
   }
+  // apollo: {
+  //   projects: {
+  //     prefetch: true,
+  //     query: allCars
+  //   }
+  // }
 }
 </script>
 

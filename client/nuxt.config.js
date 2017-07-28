@@ -46,11 +46,12 @@ module.exports = {
     '@nuxtjs/bulma',
     '@nuxtjs/font-awesome',
     '@nuxtjs/apollo',
-    ['@nuxtjs/axios', { baseURL: apiURL }]
+    ['@nuxtjs/axios', { baseURL: apiURL }],
+    'auth-devise'
   ],
   apollo: {
     clients: {
-      default: 'https://api.graph.cool/simple/v1/cj1dqiyvqqnmj0113yuqamkuu'
+      default: `${apiURL}/graphql`
     }
   }
 }

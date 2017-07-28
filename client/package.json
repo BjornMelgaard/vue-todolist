@@ -10,6 +10,8 @@
     "@nuxtjs/bulma": "^1.0.2",
     "@nuxtjs/font-awesome": "^1.0.2",
     "buefy": "^0.4.6",
+    "cookie": "^0.3.1",
+    "js-cookie": "^2.1.4",
     "nuxt": "^1.0.0-rc2"
   },
   "scripts": {
