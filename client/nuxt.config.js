@@ -39,8 +39,8 @@ module.exports = {
     baseURL: apiURL
   },
   plugins: [
-    '~plugins/buefy.js',
-    '~plugins/multiwatch.js'
+    '~plugins/buefy',
+    '~plugins/multiwatch'
   ],
   modules: [
     '@nuxtjs/bulma',
