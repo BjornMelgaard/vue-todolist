@@ -14,7 +14,7 @@
   },
   "scripts": {
     "dev": "nuxt",
-    "dev-debug": "node --inspect-brk node_modules/.bin/nuxt",
+    "dev:debug": "node --inspect-brk node_modules/.bin/nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -24,16 +24,10 @@
     "inspect-size": "nuxt build -a"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.3",
-    "eslint": "^4.3.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-loader": "^1.9.0",
-    "eslint-plugin-html": "^3.1.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-node": "^5.1.1",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
+    "@types/node": "^8.0.17",
     "node-sass": "^4.5.3",
-    "sass-loader": "^6.0.6"
+    "sass-loader": "^6.0.6",
+    "ts-loader": "^2.3.2",
+    "typescript": "^2.4.2"
   }
 }

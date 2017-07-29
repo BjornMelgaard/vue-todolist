@@ -11,7 +11,10 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
+import Component from "nuxt-class-component"
+
 import allCars from '~/queries/allCars'
 
 export default {
