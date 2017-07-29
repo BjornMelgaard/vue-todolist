@@ -2,11 +2,10 @@
 #
 # Env variables that glue client and server together
 #
-# usage - source ./bin/env.sh
+# usage - source ./bin/env
 
 export CLIENT_PORT_DEV=3000
 export SERVER_PORT_DEV=3001
 
-# export CLIENT_PORT_TEST=3000
-# export SERVER_PORT_TEST=3000
-
+export CLIENT_PORT_TEST=3002
+export SERVER_PORT_TEST=3003

@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# Run all tests once
+#
+# usage - source ./bin/run_tests
+
+source ./bin/env # just in case
+
+# wait for prebuild
+(cd client && PORT=$CLIENT_PORT_TEST API_PORT=$SERVER_PORT_TEST yarn run nuxt build)
+
+# rspec will run only features,
+# if you want all except features tests, use
+# rspec --exclude-pattern "spec/features/*"
+concurrently --kill-others \
+  "cd client && PORT=$CLIENT_PORT_TEST API_PORT=$SERVER_PORT_TEST yarn run nuxt start"\
+  "cd server && sleep 5 && PORT=$SERVER_PORT_TEST CLIENT_PORT=$CLIENT_PORT_TEST bundle exec rspec --pattern 'spec/features/*'"
+

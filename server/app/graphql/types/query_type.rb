@@ -24,7 +24,8 @@ Types::QueryType = GraphQL::ObjectType.define do
 
   field :projects, types[Types::ProjectInterface] do
     resolve Resolvers::ProjectResolver.new ->(_, _, ctx) {
-      Pundit.policy_scope!(ctx[:current_user], Project)
+      # Pundit.policy_scope!(ctx[:current_user], Project)
+      Project.all
     }
   end
 

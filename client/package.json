@@ -10,17 +10,20 @@
     "@nuxtjs/bulma": "^1.0.2",
     "@nuxtjs/font-awesome": "^1.0.2",
     "buefy": "^0.4.6",
+    "cookie": "^0.3.1",
+    "js-cookie": "^2.1.4",
     "nuxt": "^1.0.0-rc3"
   },
   "scripts": {
-    "dev": "nuxt",
-    "dev-debug": "node --inspect-brk node_modules/.bin/nuxt",
+    "dev": "PORT=$CLIENT_PORT_DEV API_PORT=$SERVER_PORT_DEV nuxt",
+    "dev:debug": "PORT=$CLIENT_PORT_DEV API_PORT=$SERVER_PORT_DEV node --inspect node_modules/.bin/nuxt",
+    "test": "export PORT=$CLIENT_PORT_TEST; export API_PORT=$SERVER_PORT_TEST; nuxt build && nuxt start",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:fix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
-    "precommit": "npm run lint",
+    "precommit": "yarn run lint",
     "inspect-size": "nuxt build -a"
   },
   "devDependencies": {
@@ -34,6 +37,8 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "node-sass": "^4.5.3",
+    "pug": "^2.0.0-rc.2",
+    "pug-loader": "^2.3.0",
     "sass-loader": "^6.0.6"
   }
 }

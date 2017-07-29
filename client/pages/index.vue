@@ -1,24 +1,22 @@
-<template>
-  <div>
-    <h3>Cars</h3>
-    <ul>
-      <li v-for="car in allCars">
-        <nuxt-link :to="`car/${car.id}`">
-          {{ car.year }} {{ car.make }} {{ car.model }}
-        </nuxt-link>
-      </li>
-    </ul>
-  </div>
+<template lang="pug">
+  div
+    h3 projects
+    ul
+      li(v-for='project in projects')
+        nuxt-link(:to='`project/${project.id}`')
+          | {{ project.name }}
 </template>
 
 <script>
-import allCars from '~/queries/allCars'
+import projects from '~/queries/projects'
 
 export default {
+  name: 'Index',
+  middleware: 'authenticated',
   apollo: {
-    allCars: {
+    projects: {
       prefetch: true,
-      query: allCars
+      query: projects
     }
   }
 }

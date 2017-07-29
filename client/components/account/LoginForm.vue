@@ -1,17 +1,10 @@
-<template>
-  <form ref="form" class="box" @submit.prevent="onSubmit">
-
-    <b-field label="Email *">
-      <b-input v-model="model.email" type="email" required></b-input>
-    </b-field>
-
-    <b-field label="Password *">
-      <b-input v-model="model.password" type="password" required maxlength="30"></b-input>
-    </b-field>
-
-    <button class="button is-primary" type="submit" :disabled="isDisabled">Submit</button>
-
-  </form>
+<template lang="pug">
+  form.box(ref='form', @submit.prevent='onSubmit')
+    b-field(label='Email *')
+      b-input(v-model='model.email', type='email', required='')
+    b-field(label='Password *')
+      b-input(v-model='model.password', type='password', required='', maxlength='30')
+    button.button.is-primary(type='submit', :disabled='isDisabled') Submit
 </template>
 
 <script>

@@ -1,4 +1,6 @@
-const apiURL = 'http://localhost:3001/api/edge'
+apiPort = process.env.API_PORT
+if(!apiPort) throw 'No api port'
+const apiURL = `http://localhost:${apiPort}/api/edge`
 
 module.exports = {
   // Headers of the page

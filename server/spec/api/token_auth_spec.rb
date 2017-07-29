@@ -12,13 +12,13 @@ RSpec.describe 'Token auth: ', type: :request do
     end
 
     before do
-      post '/auth', params: user_attrs, as: :json
+      post '/api/edge/auth', params: user_attrs, as: :json
       expect(response).to be_success
       @last_response_auth_headers = response.headers.slice('uid', 'client', 'access-token')
     end
 
     it 'can validate token' do
-      get '/auth/validate_token', headers: @last_response_auth_headers, as: :json
+      get '/api/edge/auth/validate_token', headers: @last_response_auth_headers, as: :json
       expect(response).to be_success
     end
   end
