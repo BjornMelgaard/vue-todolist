@@ -1,20 +1,38 @@
-require 'capybara/poltergeist'
-
-driver = :selenium_chrome
+driver = :local_chrome
 
 case driver
-when :selenium_chrome
-  Capybara.register_driver :selenium_chrome do |app|
+when :chrome
+  Capybara.register_driver :chrome do |app|
     Capybara::Selenium::Driver.new(app, browser: :chrome)
   end
-  Capybara.default_driver = :selenium_chrome
-  Capybara.javascript_driver = :selenium_chrome
+  Capybara.default_driver = :chrome
+  Capybara.javascript_driver = :chrome
 when :poltergeist
+  require 'capybara/poltergeist'
+
   Capybara.register_driver :poltergeist do |app|
     Capybara::Poltergeist::Driver.new(app, js_errors: false)
   end
   Capybara.default_driver = :poltergeist
   Capybara.javascript_driver = :poltergeist
+when :local_chrome
+  # usage - close chrome and 'google-chrome-stable --remote-debugging-port=4444'
+  require 'selenium-webdriver'
+
+  # Selenium::WebDriver::Chrome.path = '/usr/bin/google-chrome-stable'
+  # Selenium::WebDriver::Chrome.driver_path = '/usr/bin/chromedriver'
+
+  Capybara.register_driver :local_chrome do |app|
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_option('debuggerAddress', '127.0.0.1:4444')
+
+    Capybara::Selenium::Driver.new(app,
+                                   browser: :chrome,
+                                   options: options)
+  end
+
+  Capybara.javascript_driver = :local_chrome
+  Capybara.default_driver    = :local_chrome
 end
 
 # https://github.com/DockYard/capybara-email#setting-your-test-host

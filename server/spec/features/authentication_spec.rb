@@ -3,6 +3,7 @@ feature 'Authentication:' do
     let!(:user) { create :user }
 
     before do
+      require 'pry'; ::Kernel.binding.pry;
       login_page = Pages::LoginPage.new
       login_page.load
     end
@@ -16,14 +17,14 @@ feature 'Authentication:' do
       expect(page).to have_content 'Invalid login credentials. Please try again'
     end
 
-    scenario 'when valid' do
-      within('form') do
-        fill_in 'email', with:    user.email
-        fill_in 'password', with: user.password
-      end
-      click_button 'Submit'
-      expect(page).to have_current_path '/'
-    end
+    # scenario 'when valid' do
+    #   within('form') do
+    #     fill_in 'email', with:    user.email
+    #     fill_in 'password', with: user.password
+    #   end
+    #   click_button 'Submit'
+    #   expect(page).to have_current_path '/'
+    # end
   end
   #
   # context 'registration' do

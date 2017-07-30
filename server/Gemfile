@@ -54,16 +54,16 @@ group :development, :test do
   gem 'faker'
   gem 'database_cleaner'
   gem 'fuubar', require: false
+  gem 'site_prism'
+  gem 'capybara-screenshot'
 
   # JSON
   gem 'airborne'
 
-  # Integration testing
-  gem 'poltergeist'
+  # Drivers
+  # gem 'poltergeist'
   gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
-  gem 'capybara-screenshot'
-  gem 'site_prism'
+  # gem 'chromedriver-helper'
 
   # Email testing
   gem 'letter_opener'
