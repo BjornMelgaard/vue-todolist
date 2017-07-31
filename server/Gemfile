@@ -54,20 +54,13 @@ group :development, :test do
   gem 'faker'
   gem 'database_cleaner'
   gem 'fuubar', require: false
-  gem 'site_prism'
-  gem 'capybara-screenshot'
 
   # JSON
   gem 'airborne'
 
   # Drivers
-  # gem 'poltergeist'
-  gem 'selenium-webdriver'
-  # gem 'chromedriver-helper'
-
-  # Email testing
-  gem 'letter_opener'
-  gem 'capybara-email'
+  gem 'watir-rspec'
+  # gem 'watir-rails'
 end
 
 group :development do

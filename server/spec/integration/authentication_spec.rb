@@ -1,5 +1,7 @@
-feature 'Authentication:' do
-  context 'login' do
+require 'rails_helper'
+
+describe 'Authentication:', type: :integration do
+  describe 'login' do
     let!(:user) { create :user }
 
     before do
@@ -8,7 +10,7 @@ feature 'Authentication:' do
       login_page.load
     end
 
-    scenario 'when invalid' do
+    it 'when invalid' do
       within('form') do
         fill_in 'email', with:    user.email
         fill_in 'password', with: 'wrong_password'
@@ -17,7 +19,7 @@ feature 'Authentication:' do
       expect(page).to have_content 'Invalid login credentials. Please try again'
     end
 
-    # scenario 'when valid' do
+    # it 'when valid' do
     #   within('form') do
     #     fill_in 'email', with:    user.email
     #     fill_in 'password', with: user.password
@@ -27,14 +29,14 @@ feature 'Authentication:' do
     # end
   end
   #
-  # context 'registration' do
+  # describe 'registration' do
   #   before do
   #     visit '/'
   #     click_on 'Sign Up'
   #     expect(page).to have_current_path '/auth/sign-up'
   #   end
   #
-  #   scenario 'when valid' do
+  #   it 'when valid' do
   #     expect do
   #       user = attributes_for :user
   #       within('form') do
@@ -46,7 +48,7 @@ feature 'Authentication:' do
   #     end.to change(User, :count).by(1)
   #   end
   #
-  #   scenario 'email already taken', user_exists: true do
+  #   it 'email already taken', user_exists: true do
   #     within('form') do
   #       fill_in 'email', with:    user.email
   #       fill_in 'password', with: user.password
@@ -56,7 +58,7 @@ feature 'Authentication:' do
   #   end
   # end
   #
-  # scenario 'reset password flow', user_exists: true do
+  # it 'reset password flow', user_exists: true do
   #   visit '/'
   #   click_on 'Forgot Password?'
   #   expect(page).to have_current_path '/auth/reset-password'
