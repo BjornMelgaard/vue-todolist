@@ -1,3 +1,16 @@
+# https://github.com/DockYard/capybara-email#setting-your-test-host
+server_port = ENV['PORT']
+client_port = ENV['CLIENT_PORT']
+
+if !server_port || !client_port
+  puts 'Warning: No PORT' unless server_port
+  puts 'Warning: No CLIENT_PORT' unless client_port
+  puts 'Feature tests will probably fail'
+else
+  Capybara.server_port = server_port
+  Capybara.app_host = "http://localhost:#{client_port}"
+end
+
 driver = :local_chrome
 
 case driver
@@ -17,10 +30,6 @@ when :poltergeist
   Capybara.javascript_driver = :poltergeist
 when :local_chrome
   # usage - close chrome and 'google-chrome-stable --remote-debugging-port=4444'
-  require 'selenium-webdriver'
-
-  # Selenium::WebDriver::Chrome.path = '/usr/bin/google-chrome-stable'
-  # Selenium::WebDriver::Chrome.driver_path = '/usr/bin/chromedriver'
 
   Capybara.register_driver :local_chrome do |app|
     options = Selenium::WebDriver::Chrome::Options.new
@@ -33,17 +42,11 @@ when :local_chrome
 
   Capybara.javascript_driver = :local_chrome
   Capybara.default_driver    = :local_chrome
-end
 
-# https://github.com/DockYard/capybara-email#setting-your-test-host
-server_port = ENV['PORT']
-client_port = ENV['CLIENT_PORT']
-
-if !server_port || !client_port
-  puts 'Warning: No PORT' unless server_port
-  puts 'Warning: No CLIENT_PORT' unless client_port
-  puts 'Feature tests will probably fail'
-else
-  Capybara.server_port = server_port
-  Capybara.app_host = "http://localhost:#{client_port}"
+  # RSpec.configure do |config|
+  #   config.before(:each, type: :feature) do
+  #     require 'pry'; ::Kernel.binding.pry;
+  #     # visit('')
+  #   end
+  # end
 end

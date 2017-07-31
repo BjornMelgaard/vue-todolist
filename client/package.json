@@ -12,7 +12,8 @@
     "buefy": "^0.4.6",
     "cookie": "^0.3.1",
     "js-cookie": "^2.1.4",
-    "nuxt": "^1.0.0-rc3"
+    "nuxt": "^1.0.0-rc3",
+    "vuex": "https://github.com/vuejs/vuex#dev"
   },
   "scripts": {
     "dev": "PORT=$CLIENT_PORT_DEV API_PORT=$SERVER_PORT_DEV nuxt",

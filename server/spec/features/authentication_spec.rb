@@ -3,17 +3,17 @@ feature 'Authentication:' do
     let!(:user) { create :user }
 
     before do
-      require 'pry'; ::Kernel.binding.pry;
       login_page = Pages::LoginPage.new
       login_page.load
     end
 
     scenario 'when invalid' do
       within('form') do
-        fill_in 'email', with:    user.email
-        fill_in 'password', with: 'wrong_password'
+        fill_in 'Email',    with: user.email
+        fill_in 'Password', with: 'wrong_password'
       end
       click_button 'Submit'
+      require 'pry'; ::Kernel.binding.pry;
       expect(page).to have_content 'Invalid login credentials. Please try again'
     end
 

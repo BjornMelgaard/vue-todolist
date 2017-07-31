@@ -1,40 +1,43 @@
 <template lang="pug">
   form.box(ref='form', @submit.prevent='onSubmit')
     b-field(label='Email *')
-      b-input(v-model='model.email', type='email', required='')
+      b-input(v-model='model.email', type='email', placeholder='Email', required)
     b-field(label='Password *')
-      b-input(v-model='model.password', type='password', required='', maxlength='30')
-    button.button.is-primary(type='submit', :disabled='isDisabled') Submit
+      b-input(v-model='model.password', type='password', placeholder='Password', required, maxlength='30')
+    button.button.is-primary(type='submit', :disabled='isDisabled', :class="{'is-loading': isLoading}") Submit
 </template>
 
 <script>
-  export default {
-    name: 'LoginForm',
-    props: {
-      redirect: {
-        type: String,
-        default: '/'
-      }
-    },
-    data () {
-      return {
-        isDisabled: true,
-        model: {
-          email: '',
-          password: ''
-        }
-      }
-    },
-    created () {
-      this.$multiwatch(['model.email', 'model.password'], function () {
-        const valid = this.$refs.form.checkValidity()
-        this.isDisabled = !valid
-      })
-    },
-    methods: {
-      onSubmit () {
-        this.$emit('submit', this.model)
+export default {
+  name: 'LoginForm',
+  props: {
+    redirect: {
+      type: String,
+      default: '/'
+    }
+  },
+  data () {
+    return {
+      isLoading: false,
+      isDisabled: true,
+      model: {
+        email: '',
+        password: ''
       }
     }
+  },
+  created () {
+    this.$multiwatch(['model.email', 'model.password'], function () {
+      const valid = this.$refs.form.checkValidity()
+      this.isDisabled = !valid
+    })
+  },
+  methods: {
+    async onSubmit () {
+      this.isLoading = true
+      await this.$store.dispatch('login', this.model)
+      this.isLoading = false
+    }
   }
+}
 </script>

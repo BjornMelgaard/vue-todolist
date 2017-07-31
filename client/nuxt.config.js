@@ -1,5 +1,5 @@
-apiPort = process.env.API_PORT
-if(!apiPort) throw 'No api port'
+const apiPort = process.env.API_PORT
+if (!apiPort) throw new Error('No api port')
 const apiURL = `http://localhost:${apiPort}/api/edge`
 
 module.exports = {
@@ -48,7 +48,7 @@ module.exports = {
     '@nuxtjs/bulma',
     '@nuxtjs/font-awesome',
     '@nuxtjs/apollo',
-    ['@nuxtjs/axios', { baseURL: apiURL }],
+    ['@nuxtjs/axios', { baseURL: apiURL, debug: process.env.NODE_ENV !== 'production' }],
     'auth-devise'
   ],
   apollo: {

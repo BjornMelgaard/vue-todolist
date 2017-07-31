@@ -3,4 +3,3 @@ export default function ({ store, redirect }) {
     redirect('/account/login')
   }
 }
-

@@ -15,13 +15,13 @@ export default {
     Car: {
       query: car,
       prefetch: ({ route }) => ({ id: route.params.id }),
-      variables() {
+      variables () {
         return { id: this.$route.params.id }
       }
     }
   },
   methods: {
-    formatCurrency(num) {
+    formatCurrency (num) {
       const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
