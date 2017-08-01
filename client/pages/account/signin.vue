@@ -9,11 +9,11 @@
 </template>
 
 <script>
-  import SigninForm from '~/components/account/SigninForm'
+import SigninForm from '~/components/account/SigninForm'
 
-  export default {
-    name: 'Signin',
-    middleware: 'unauthenticated',
-    components: { SigninForm }
-  }
+export default {
+  name: 'Signin',
+  middleware: 'unauthenticated',
+  components: { SigninForm }
+}
 </script>

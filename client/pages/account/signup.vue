@@ -7,8 +7,8 @@
 </template>
 
 <script>
-  export default {
-    name: 'Signup',
-    middleware: 'unauthenticated'
-  }
+export default {
+  name: 'Signup',
+  middleware: 'unauthenticated'
+}
 </script>

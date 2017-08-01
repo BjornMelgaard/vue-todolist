@@ -51,7 +51,7 @@ export default {
         this.button.loading = false
         console.log(err.response)
         // const errors = _.get(err, ['response', 'data', 'errors'])
-        errorMessage = err?.response?.data?.errors?.join('\n')
+        const errorMessage = err?.response?.data?.errors?.join('\n')
         if (errorMessage) {
           this.error.text = errorMessage
         } else {
