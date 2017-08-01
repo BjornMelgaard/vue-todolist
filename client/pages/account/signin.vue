@@ -5,15 +5,15 @@
         .columns.is.vcentered
           .column.is-8-tablet.is-offset-2-tablet.is-6-desktop.is-offset-3-desktop
             h1.title I already have an account
-            login-form
+            signin-form
 </template>
 
 <script>
-  import LoginForm from '~/components/account/LoginForm'
+  import SigninForm from '~/components/account/SigninForm'
 
   export default {
-    name: 'Login',
+    name: 'Signin',
     middleware: 'unauthenticated',
-    components: { LoginForm }
+    components: { SigninForm }
   }
 </script>

@@ -50,8 +50,15 @@ module.exports = {
     '@nuxtjs/font-awesome',
     '@nuxtjs/apollo',
     'auth-devise',
-    ['@nuxtjs/axios', { baseURL: apiURL, debug: process.env.NODE_ENV !== 'production' }]
+    '@nuxtjs/axios'
   ],
+  axios: {
+    baseURL:      apiURL,
+    // debug:        process.env.NODE_ENV !== 'production',
+    debug:        false,
+    proxyHeaders: false,
+    credentials:  false
+  },
   apollo: {
     clients: {
       default: `${apiURL}/graphql`

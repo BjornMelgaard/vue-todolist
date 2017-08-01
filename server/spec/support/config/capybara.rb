@@ -2,16 +2,16 @@
 server_port = ENV['PORT']
 client_port = ENV['CLIENT_PORT']
 
-if !server_port || !client_port
-  puts 'Warning: No PORT' unless server_port
-  puts 'Warning: No CLIENT_PORT' unless client_port
+if server_port.blank? || client_port.blank?
+  puts 'Warning: No PORT'        if server_port.blank?
+  puts 'Warning: No CLIENT_PORT' if client_port.blank?
   puts 'Feature tests will probably fail'
 else
   Capybara.server_port = server_port
   Capybara.app_host = "http://localhost:#{client_port}"
 end
 
-driver = :chrome
+driver = :local_chrome
 
 case driver
 when :chrome
@@ -42,11 +42,4 @@ when :local_chrome
 
   Capybara.javascript_driver = :local_chrome
   Capybara.default_driver    = :local_chrome
-
-  # RSpec.configure do |config|
-  #   config.before(:each, type: :feature) do
-  #     require 'pry'; ::Kernel.binding.pry;
-  #     # visit('')
-  #   end
-  # end
 end

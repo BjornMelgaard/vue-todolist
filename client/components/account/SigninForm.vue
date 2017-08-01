@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'LoginForm',
+  name: 'SigninForm',
   props: {
     redirect: {
       type: String,
@@ -35,8 +35,14 @@ export default {
   methods: {
     async onSubmit () {
       this.isLoading = true
-      await this.$store.dispatch('login', this.model)
-      this.isLoading = false
+      try {
+        await this.$store.dispatch('signIn', this.model)
+        this.$router.push(this.redirect)
+      } catch (error) {
+        console.log('asdf')
+        this.isLoading = false
+        debugger;
+      }
     }
   }
 }

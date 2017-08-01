@@ -1,31 +1,31 @@
 feature 'Authentication:' do
-  context 'login' do
+  context 'signin' do
     let!(:user) { create :user }
 
     before do
-      require 'pry'; ::Kernel.binding.pry;
-      login_page = Pages::LoginPage.new
-      login_page.load
+      visit('/account/signin')
+    end
+
+    def signin(email, password)
+      within('form') do
+        fill_in 'Email', with:    email
+        fill_in 'Password', with: password
+      end
+      expect(page).to have_button('Submit', disabled: false)
+      click_button 'Submit'
     end
 
     scenario 'when invalid' do
-      within('form') do
-        fill_in 'Email',    with: user.email
-        fill_in 'Password', with: 'wrong_password'
-      end
-      click_button 'Submit'
-      require 'pry'; ::Kernel.binding.pry;
-      expect(page).to have_content 'Invalid login credentials. Please try again'
+      signin(user.email, 'wrong')
+      sleep 3; require 'pry'; ::Kernel.binding.pry;
+      exit
+      expect(page).to have_content 'Invalid signin credentials. Please try again'
     end
 
-    # scenario 'when valid' do
-    #   within('form') do
-    #     fill_in 'email', with:    user.email
-    #     fill_in 'password', with: user.password
-    #   end
-    #   click_button 'Submit'
-    #   expect(page).to have_current_path '/'
-    # end
+    scenario 'when valid' do
+      signin(user.email, user.password)
+      expect(page).to have_current_path '/'
+    end
   end
   #
   # context 'registration' do
