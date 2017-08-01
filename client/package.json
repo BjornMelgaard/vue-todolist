@@ -19,7 +19,9 @@
   "scripts": {
     "dev": "PORT=$CLIENT_PORT_DEV API_PORT=$SERVER_PORT_DEV nuxt",
     "dev:debug": "PORT=$CLIENT_PORT_DEV API_PORT=$SERVER_PORT_DEV node --inspect node_modules/.bin/nuxt",
-    "test": "export PORT=$CLIENT_PORT_TEST; export API_PORT=$SERVER_PORT_TEST; nuxt build && nuxt start",
+    "test": "PORT=$CLIENT_PORT_TEST API_PORT=$SERVER_PORT_TEST nuxt",
+    "test:debug": "PORT=$CLIENT_PORT_TEST API_PORT=$SERVER_PORT_TEST node --inspect node_modules/.bin/nuxt",
+    "test:nohot": "export PORT=$CLIENT_PORT_TEST; export API_PORT=$SERVER_PORT_TEST; nuxt build && nuxt start",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -27,10 +29,12 @@
     "lint:fix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "yarn run lint",
     "inspect-size": "nuxt build -a",
-    "after-upgrade": "yu && y link auth-devise && (cd node_modules/vuex && yi && yr build)"
+    "after-upgrade": "yarn link auth-devise && (cd node_modules/vuex && yarn install && yarn run build)"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-plugin-syntax-optional-chaining": "^7.0.0-alpha.13",
     "eslint": "^4.3.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-loader": "^1.9.0",

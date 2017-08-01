@@ -17,8 +17,7 @@ feature 'Authentication:' do
 
     scenario 'when invalid' do
       signin(user.email, 'wrong')
-      sleep 3; require 'pry'; ::Kernel.binding.pry;
-      exit
+      require 'pry'; ::Kernel.binding.pry;
       expect(page).to have_content 'Invalid signin credentials. Please try again'
     end
 

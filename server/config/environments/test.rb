@@ -43,4 +43,12 @@ Rails.application.configure do
   # email config
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { host: 'localhost', port: 3001 }
+
+  # for capybara testing, when server is started by hand
+  if ENV["RAILS_LOG_TO_STDOUT"].present?
+    config.log_formatter = ::Logger::Formatter.new
+    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger.formatter = config.log_formatter
+    config.logger    = ActiveSupport::TaggedLogging.new(logger)
+  end
 end

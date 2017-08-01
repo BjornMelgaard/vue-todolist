@@ -34,7 +34,10 @@ module.exports = {
     //     })
     //   }
     // },
-    vendor: ['babel-polyfill']
+    vendor: ['babel-polyfill'],
+    babel: {
+      plugins: ['lodash', 'syntax-optional-chaining']
+    }
   },
   env: {
     // dublicate of axios baseURL for internal usage
@@ -53,11 +56,10 @@ module.exports = {
     '@nuxtjs/axios'
   ],
   axios: {
-    baseURL:      apiURL,
-    // debug:        process.env.NODE_ENV !== 'production',
-    debug:        false,
+    baseURL: apiURL,
+    debug: process.env.NODE_ENV !== 'production',
     proxyHeaders: false,
-    credentials:  false
+    credentials: false
   },
   apollo: {
     clients: {

@@ -1,14 +1,12 @@
 # https://github.com/DockYard/capybara-email#setting-your-test-host
-server_port = ENV['PORT']
 client_port = ENV['CLIENT_PORT']
 
-if server_port.blank? || client_port.blank?
-  puts 'Warning: No PORT'        if server_port.blank?
-  puts 'Warning: No CLIENT_PORT' if client_port.blank?
+if client_port.blank?
+  puts 'Warning: No CLIENT_PORT'
   puts 'Feature tests will probably fail'
 else
-  Capybara.server_port = server_port
   Capybara.app_host = "http://localhost:#{client_port}"
+  Capybara.run_server = false
 end
 
 driver = :local_chrome
@@ -29,7 +27,15 @@ when :poltergeist
   Capybara.default_driver = :poltergeist
   Capybara.javascript_driver = :poltergeist
 when :local_chrome
-  # usage - close chrome and reopen with 'google-chrome-stable --remote-debugging-port=4444'
+  # usage:
+  # start client - cd client && yarn run test:debug
+  # start server - cd server && RAILS_LOG_TO_STDOUT=true rails s -p $SERVER_PORT_TEST -e test
+  # close chrome and reopen with 'google-chrome-stable --remote-debugging-port=4444'
+  # run tests -    cd server && CLIENT_PORT=$CLIENT_PORT_TEST rspec spec/features
+  # why:
+  # great for bdd spa applications
+  # test server with logging
+  # spa rendering debug with nodejs-chrome extention
 
   Capybara.register_driver :local_chrome do |app|
     options = Selenium::WebDriver::Chrome::Options.new
