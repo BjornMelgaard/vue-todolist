@@ -1,5 +1,4 @@
 require 'watir/rspec'
-require_relative '../lib/watir/rails'
 
 RSpec.configure do |config|
   # Use Watir::RSpec::HtmlFormatter to get links to the screenshots, html and
@@ -9,9 +8,7 @@ RSpec.configure do |config|
 
   # Open up the browser for each example.
   config.before :all, type: :integration do
-    server_port = ENV['PORT']
     client_port = ENV['CLIENT_PORT']
-    raise 'Warning: No PORT' if server_port.blank?
     raise 'Warning: No CLIENT_PORT' if client_port.blank?
     debugger_port = 4444
     app_host = "http://localhost:#{client_port}"
@@ -19,9 +16,7 @@ RSpec.configure do |config|
     options = Selenium::WebDriver::Chrome::Options.new
     options.add_option('debuggerAddress', "127.0.0.1:#{debugger_port}")
     @browser = Watir::Browser.new :chrome,
-                                  options: options,
-                                  server_port: server_port,
-                                  app_host: app_host
+                                  options: options
 
     unless @browser.url.start_with?(app_host)
       # open new tab
@@ -30,6 +25,7 @@ RSpec.configure do |config|
       # @browser.driver.action.send_keys(:control, 't').perform
 
       # goto
+      require 'pry'; ::Kernel.binding.pry;
       @browser.goto(app_host)
     end
   end

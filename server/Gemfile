@@ -58,9 +58,9 @@ group :development, :test do
   # JSON
   gem 'airborne'
 
-  # Drivers
+  # Integration
   gem 'watir-rspec'
-  # gem 'watir-rails'
+  gem 'chromedriver-helper'
 end
 
 group :development do
