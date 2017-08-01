@@ -11,7 +11,7 @@ else
   Capybara.app_host = "http://localhost:#{client_port}"
 end
 
-driver = :local_chrome
+driver = :chrome
 
 case driver
 when :chrome
@@ -29,7 +29,7 @@ when :poltergeist
   Capybara.default_driver = :poltergeist
   Capybara.javascript_driver = :poltergeist
 when :local_chrome
-  # usage - close chrome and 'google-chrome-stable --remote-debugging-port=4444'
+  # usage - close chrome and reopen with 'google-chrome-stable --remote-debugging-port=4444'
 
   Capybara.register_driver :local_chrome do |app|
     options = Selenium::WebDriver::Chrome::Options.new

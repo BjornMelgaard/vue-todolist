@@ -3,6 +3,7 @@ feature 'Authentication:' do
     let!(:user) { create :user }
 
     before do
+      require 'pry'; ::Kernel.binding.pry;
       login_page = Pages::LoginPage.new
       login_page.load
     end

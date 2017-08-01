@@ -44,12 +44,13 @@ module.exports = {
     '~plugins/buefy',
     '~plugins/multiwatch'
   ],
+  // loading starts from bottom
   modules: [
     '@nuxtjs/bulma',
     '@nuxtjs/font-awesome',
     '@nuxtjs/apollo',
-    ['@nuxtjs/axios', { baseURL: apiURL, debug: process.env.NODE_ENV !== 'production' }],
-    'auth-devise'
+    'auth-devise',
+    ['@nuxtjs/axios', { baseURL: apiURL, debug: process.env.NODE_ENV !== 'production' }]
   ],
   apollo: {
     clients: {

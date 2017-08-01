@@ -61,9 +61,9 @@ group :development, :test do
   gem 'airborne'
 
   # Drivers
-  # gem 'poltergeist'
+  gem 'poltergeist'
   gem 'selenium-webdriver'
-  # gem 'chromedriver-helper'
+  gem 'chromedriver-helper'
 
   # Email testing
   gem 'letter_opener'
