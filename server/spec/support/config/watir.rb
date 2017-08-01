@@ -11,8 +11,8 @@ RSpec.configure do |config|
   config.before :all, type: :integration do
     server_port = ENV['PORT']
     client_port = ENV['CLIENT_PORT']
-    raise 'Warning: No PORT' unless server_port
-    raise 'Warning: No CLIENT_PORT' unless client_port
+    raise 'Warning: No PORT' if server_port.blank?
+    raise 'Warning: No CLIENT_PORT' if client_port.blank?
     debugger_port = 4444
     app_host = "http://localhost:#{client_port}"
 

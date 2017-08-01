@@ -50,6 +50,7 @@ module Watir
 
           @server_thread = Thread.new do
             run_default_server @middleware, @port
+            puts 'asdf'
           end
 
           Timeout.timeout(boot_timeout) { @server_thread.join(0.1) until running? }
