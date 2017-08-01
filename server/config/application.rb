@@ -16,7 +16,7 @@ require 'sprockets/railtie'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module NgrxTodolist
+module VueTodolist
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
@@ -29,5 +29,15 @@ module NgrxTodolist
     config.generators.system_tests = nil
 
     config.autoload_paths += %w[lib]
+
+    config.middleware.use Rack::Cors do
+      allow do
+        origins '*'
+        resource '*',
+                 headers: :any,
+                 expose:  %w[access-token expiry token-type uid client],
+                 methods: %i[get post options delete put]
+      end
+    end
   end
 end

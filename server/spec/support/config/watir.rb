@@ -1,5 +1,20 @@
 require 'watir/rspec'
 
+module IntegrationExtention
+  def app_host
+    @app_host ||=
+      begin
+        client_port = ENV['CLIENT_PORT']
+        raise 'Warning: No CLIENT_PORT' if client_port.blank?
+        "http://localhost:#{client_port}"
+      end
+  end
+
+  def visit(url)
+    goto(app_host + url)
+  end
+end
+
 RSpec.configure do |config|
   # Use Watir::RSpec::HtmlFormatter to get links to the screenshots, html and
   # all other files created during the failing examples.
@@ -8,24 +23,12 @@ RSpec.configure do |config|
 
   # Open up the browser for each example.
   config.before :all, type: :integration do
-    client_port = ENV['CLIENT_PORT']
-    raise 'Warning: No CLIENT_PORT' if client_port.blank?
-    debugger_port = 4444
-    app_host = "http://localhost:#{client_port}"
-
     options = Selenium::WebDriver::Chrome::Options.new
-    options.add_option('debuggerAddress', "127.0.0.1:#{debugger_port}")
+    options.add_option('debuggerAddress', '127.0.0.1:4444')
     @browser = Watir::Browser.new :chrome,
                                   options: options
 
     unless @browser.url.start_with?(app_host)
-      # open new tab
-      # @browser.execute_script("window.open('about:blank','_blank');")
-      # @browser.driver.action.key_down(:control).send_keys('t').key_up(:control).perform
-      # @browser.driver.action.send_keys(:control, 't').perform
-
-      # goto
-      require 'pry'; ::Kernel.binding.pry;
       @browser.goto(app_host)
     end
   end
@@ -57,4 +60,5 @@ RSpec.configure do |config|
   # You can also use #during to test if something stays the same during the specified period:
   #   expect(@browser.text_field(name: "first_name")).to exist.during(2)
   config.include Watir::RSpec::Matchers, type: :integration
+  config.include IntegrationExtention,   type: :integration
 end

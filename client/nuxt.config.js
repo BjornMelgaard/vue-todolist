@@ -1,5 +1,5 @@
-apiPort = process.env.API_PORT
-if(!apiPort) throw 'No api port'
+const apiPort = process.env.API_PORT
+if (!apiPort) throw new Error('No api port')
 const apiURL = `http://localhost:${apiPort}/api/edge`
 
 module.exports = {
@@ -44,13 +44,21 @@ module.exports = {
     '~plugins/buefy',
     '~plugins/multiwatch'
   ],
+  // loading starts from bottom
   modules: [
     '@nuxtjs/bulma',
     '@nuxtjs/font-awesome',
     '@nuxtjs/apollo',
-    ['@nuxtjs/axios', { baseURL: apiURL }],
-    'auth-devise'
+    'auth-devise',
+    '@nuxtjs/axios'
   ],
+  axios: {
+    baseURL:      apiURL,
+    // debug:        process.env.NODE_ENV !== 'production',
+    debug:        false,
+    proxyHeaders: false,
+    credentials:  false
+  },
   apollo: {
     clients: {
       default: `${apiURL}/graphql`

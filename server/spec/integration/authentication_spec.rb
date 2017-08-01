@@ -1,35 +1,34 @@
-require 'rails_helper'
-
 describe 'Authentication:', type: :integration do
-  describe 'login' do
+  context 'signin' do
     let!(:user) { create :user }
 
     before do
+      visit('/account/signin')
+    end
+
+    def signin(email, password)
       require 'pry'; ::Kernel.binding.pry;
-      login_page = Pages::LoginPage.new
-      login_page.load
+      within('form') do
+        fill_in 'Email', with:    email
+        fill_in 'Password', with: password
+      end
+      expect(page).to have_button('Submit', disabled: false)
+      click_button 'Submit'
     end
 
     it 'when invalid' do
-      within('form') do
-        fill_in 'email', with:    user.email
-        fill_in 'password', with: 'wrong_password'
-      end
-      click_button 'Submit'
-      expect(page).to have_content 'Invalid login credentials. Please try again'
+      signin(user.email, 'wrong')
+      require 'pry'; ::Kernel.binding.pry;
+      expect(page).to have_content 'Invalid signin credentials. Please try again'
     end
 
-    # it 'when valid' do
-    #   within('form') do
-    #     fill_in 'email', with:    user.email
-    #     fill_in 'password', with: user.password
-    #   end
-    #   click_button 'Submit'
-    #   expect(page).to have_current_path '/'
-    # end
+    it 'when valid' do
+      signin(user.email, user.password)
+      expect(page).to have_current_path '/'
+    end
   end
-  #
-  # describe 'registration' do
+
+  # context 'registration' do
   #   before do
   #     visit '/'
   #     click_on 'Sign Up'
@@ -83,3 +82,4 @@ describe 'Authentication:', type: :integration do
   #   expect(page).to have_content 'Password was successfully updated'
   # end
 end
+

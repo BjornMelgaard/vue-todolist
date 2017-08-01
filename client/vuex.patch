@@ -1,0 +1,30 @@
+From 3e3a89b5dc1e926eca80987ee58d9524f4e2d8b5 Mon Sep 17 00:00:00 2001
+From: Pooya Parsa <pooya@pi0.ir>
+Date: Wed, 19 Jul 2017 19:06:35 +0430
+Subject: [PATCH] feat(store): bind mutation and action handlers to store
+
+---
+ src/store.js | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/store.js b/src/store.js
+index 3a4f1bab..9c76036e 100644
+--- a/src/store.js
++++ b/src/store.js
+@@ -373,14 +373,14 @@ function makeLocalGetters (store, namespace) {
+ function registerMutation (store, type, handler, local) {
+   const entry = store._mutations[type] || (store._mutations[type] = [])
+   entry.push(function wrappedMutationHandler (payload) {
+-    handler(local.state, payload)
++    handler.call(store, local.state, payload)
+   })
+ }
+
+ function registerAction (store, type, handler, local) {
+   const entry = store._actions[type] || (store._actions[type] = [])
+   entry.push(function wrappedActionHandler (payload, cb) {
+-    let res = handler({
++    let res = handler.call(store, {
+       dispatch: local.dispatch,
+       commit: local.commit,
+       getters: local.getters,
