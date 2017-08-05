@@ -16,7 +16,7 @@ gem 'pg'
 
 # Authentication
 gem 'devise'
-gem 'devise_token_auth'
+gem 'doorkeeper'
 gem 'omniauth'
 gem 'omniauth-github'
 
