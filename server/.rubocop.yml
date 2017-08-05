@@ -13,12 +13,12 @@ Style/FrozenStringLiteralComment:
 Style/Documentation:
   Enabled: false
 
+Style/Lambda:
+  EnforcedStyle: literal
+
+Style/SpaceInLambdaLiteral:
+  EnforcedStyle: require_space
+
 Style/Attr:
   Exclude:
     - 'app/graphql/**/*'
-
-Style/Lambda:
-  EnforcedStyle: literal
-  Include:
-    - 'app/graphql/**/*'
-

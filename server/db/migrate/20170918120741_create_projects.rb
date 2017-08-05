@@ -3,7 +3,8 @@ class CreateProjects < ActiveRecord::Migration[5.0]
     create_table :projects do |t|
       t.string :name
 
-      t.belongs_to :user
+      t.integer :user_id
+      t.index ['user_id'], name: 'index_projects_on_user_id'
 
       t.timestamps
     end

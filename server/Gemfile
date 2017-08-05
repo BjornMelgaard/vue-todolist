@@ -15,10 +15,8 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'pg'
 
 # Authentication
-gem 'devise'
-gem 'devise_token_auth'
-gem 'omniauth'
-gem 'omniauth-github'
+gem 'knock'
+gem 'auth0'
 
 # API
 gem 'graphql'

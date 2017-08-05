@@ -1,15 +1,18 @@
-return unless Rails.env.development?
+def get_user_token(email, password)
+  client = Auth0Client.new(
+    client_id:   ENV['AUTH0_CLIENT_ID'],
+    token:       ENV['AUTH0_API_TOKEN'],
+    domain:      ENV['AUTH0_DOMAIN'],
+    api_version: 2
+  )
+  require 'pry'; ::Kernel.binding.pry;
+  client.login(email, password)
+end
 
-email    = ENV['GRAPHIQL_USER']
-password = ENV['GRAPHIQL_PASSWORD']
+get_user_token(ENV['GRAPHIQL_USER'], ENV['GRAPHIQL_PASSWORD'])
 
-raise if email.blank? || password.blank?
-
-user = User.find_by(email: email)
-
-auth_headers = user.create_new_auth_token
-
-# unfortunatelly GraphiQL headers can be only in type [Hash<String => Proc>]
-auth_headers.each do |key, value|
-  GraphiQL::Rails.config.headers[key] = ->(_) { value }
+if Rails.env.development?
+  GraphiQL::Rails.config.headers['Authorization'] = -> (_) do
+    "Bearer #{get_user_token(ENV['GRAPHIQL_USER'], ENV['GRAPHIQL_PASSWORD'])}"
+  end
 end
